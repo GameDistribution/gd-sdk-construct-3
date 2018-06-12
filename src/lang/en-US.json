@@ -1,0 +1,43 @@
+﻿{
+	"languageTag": "en-US",
+	"fileDescription": "Strings for GameDistribution SDK.",
+	"text": {
+		"plugins": {
+			"gd_sdk": {
+				"name": "GameDistribution SDK",
+				"description": "Construct 2 & 3 plugin for the GameDistribution SDK",
+				"help-url": "https://www.gamedistribution.com/sdk",
+				"properties": {
+					"game-id": {
+						"name": "Game ID",
+						"desc": "Enter your Game ID (required)"
+					}
+				},
+				"conditions": {
+					"pause-game": {
+						"list-name": "Playing an ad - pause the game",
+						"display-text": "Ad playing",
+						"description": "An ad has started playing - pause the game"
+					},
+					"resume-game": {
+						"list-name": "Ad has finished playing - resume the game",
+						"display-text": "Ad finished",
+						"description": "An ad has finished playing, you can now resume the game"
+					},
+					"ad-viewed": {
+						"list-name": "The player has viewed an ad",
+						"display-text": "Ad viewed",
+						"description": "The player has watched an entire ad. You can use this to reward them with in-game items, for example."
+					}
+				},
+				"actions": {
+					"show-ad": {
+						"list-name": "Display an ad",
+						"display-text": "Display an ad",
+						"description": "Tries to display an ad. Make sure to also handle the appropriate conditions."
+					}
+				}
+			}
+		}
+	}
+}
