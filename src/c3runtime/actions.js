@@ -6,7 +6,7 @@
 		ShowAd()
 		{
 			if(!this._sdkReady) return;
-			window['gdsdk'].showBanner();
+			window['gdsdk']['showBanner']();
 		}
 	};
 }

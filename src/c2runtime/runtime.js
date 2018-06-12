@@ -152,7 +152,7 @@ cr.plugins_.GD_SDK = function(runtime)
 	Acts.prototype.ShowAd = function()
 	{
 		if(!this.sdkReady) return;
-		window['gdsdk'].showBanner();
+		window['gdsdk']['showBanner']();
 	}
 	
 	pluginProto.acts = new Acts();
