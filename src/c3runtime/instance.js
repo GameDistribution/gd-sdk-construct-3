@@ -40,7 +40,6 @@
 				},
 				"onEvent": event => {
 					//https://github.com/GameDistribution/GD-HTML5
-					console.log(event);
 					switch (event.name) {
 						case "SDK_GAME_START":
 							// advertisement done, resume game logic and unmute audio
@@ -60,7 +59,7 @@
 							// this event is triggered when the user watched an entire ad
 							this._adViewed = true;
 							setTimeout(()=>{
-								this.adViewed = false;
+								this._adViewed = false;
 							}, 5000);
 							break;
 						case "SDK_READY":

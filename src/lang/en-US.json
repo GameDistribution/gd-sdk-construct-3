@@ -13,6 +13,9 @@
 						"desc": "Enter your Game ID (required)"
 					}
 				},
+				"aceCategories": {
+					"custom": "Custom"
+				},
 				"conditions": {
 					"pause-game": {
 						"list-name": "Playing an ad - pause the game",
