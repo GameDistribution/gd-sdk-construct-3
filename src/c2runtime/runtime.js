@@ -41,18 +41,31 @@ cr.plugins_.GD_SDK = function(runtime)
 		this.adPlaying = false;
 		this.adViewed = false;
 
+	};
+	
+	var instanceProto = pluginProto.Instance.prototype;
+	
+	instanceProto.onCreate = function()
+	{
+		// Read properties set in C3
+		this.gameID = this.properties[0];
+
 		try {
-			if (localStorage.getItem("gd_tag")){
-				localStorage.removeItem("gd_tag");
-			} else if(this.runtime.exportType == "preview") {
-				localStorage.setItem("gd_debug", true);
-				localStorage.setItem("gd_tag", "https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/124319096/external/single_ad_samples&ciu_szs=300x250&impl=s&gdfp_req=1&env=vp&output=vast&unviewed_position_start=1&cust_params=deployment%3Ddevsite%26sample_ct%3Dlinear&correlator=")					
+			try {
+				if(this._runtime.IsPreview()) {
+					localStorage.setItem("gd_debug", true);
+					localStorage.setItem("gd_tag", "https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/124319096/external/single_ad_samples&ciu_szs=300x250&impl=s&gdfp_req=1&env=vp&output=vast&unviewed_position_start=1&cust_params=deployment%3Ddevsite%26sample_ct%3Dlinear&correlator=")					
+				}else{
+					localStorage.removeItem("gd_debug");
+					localStorage.removeItem("gd_tag");
+				}
+			} catch (e) {
 			}
 		} catch (e) {
 		}
 
 		window["GD_OPTIONS"] = {
-			"gameId": this._gameID,
+			"gameId": this.gameID,
 			// "prefix": "gd_", // Set your own prefix in case you get id conflicts.
 			"advertisementSettings": {
 				// "debug": true, // Enable IMA SDK debugging.
@@ -101,15 +114,6 @@ cr.plugins_.GD_SDK = function(runtime)
 			js.src = '//html5.api.gamedistribution.com/main.min.js';
 			fjs.parentNode.insertBefore(js, fjs);
 		}(document, 'script', 'gamedistribution-jssdk'));
-
-	};
-	
-	var instanceProto = pluginProto.Instance.prototype;
-	
-	instanceProto.onCreate = function()
-	{
-		// Read properties set in C3
-		this.gameID = this.properties[0];
 	};
 	
 	instanceProto.saveToJSON = function ()

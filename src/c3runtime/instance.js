@@ -21,11 +21,12 @@
 			}
 
 			try {
-				if (localStorage.getItem("gd_tag")){
-					localStorage.removeItem("gd_tag");
-				} else if(this._runtime.IsPreview()) {
+				if(this._runtime.IsPreview()) {
 					localStorage.setItem("gd_debug", true);
 					localStorage.setItem("gd_tag", "https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/124319096/external/single_ad_samples&ciu_szs=300x250&impl=s&gdfp_req=1&env=vp&output=vast&unviewed_position_start=1&cust_params=deployment%3Ddevsite%26sample_ct%3Dlinear&correlator=")					
+				}else{
+					localStorage.removeItem("gd_debug");
+					localStorage.removeItem("gd_tag");
 				}
 			} catch (e) {
 			}
