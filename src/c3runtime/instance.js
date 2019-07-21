@@ -11,7 +11,7 @@
       this._adPlaying = false;
       this._adViewed = false;
       this._preloadedAd = false;
-      this._available_adtypes=["interstitial","rewarded"];
+      this._available_adtypes = ["interstitial", "rewarded"];
 
       // note properties may be null in some cases
       if (properties) {
@@ -73,8 +73,8 @@
               break;
           }
         }
-	  };
-	  
+      };
+
       //Load the SDK from the CDN
       (function(d, s, id) {
         var js,
@@ -102,10 +102,11 @@
     }
 
     PreloadAd(adType) {
-      adType=this._available_adtypes[adType]||adType;
+      adType = this._available_adtypes[adType] || adType;
+
+      this._preloadedAd = false;
 
       var gdsdk = window["gdsdk"];
-      this._preloadedAd = false;
       if (gdsdk !== "undefined" && gdsdk.preloadAd !== "undefined") {
         gdsdk
           .preloadAd(adType)
@@ -117,9 +118,9 @@
           });
       }
     }
-
+    
     ShowAd(adType) {
-      adType=this._available_adtypes[adType]||adType;
+      adType = this._available_adtypes[adType] || adType;
 
       var gdsdk = window["gdsdk"];
       if (gdsdk !== "undefined" && gdsdk.showAd !== "undefined") {

@@ -5,8 +5,8 @@
     ShowAd(adType) {
       this.ShowAd(adType);
     },
-    PreloaAd(adType) {
-      this.PreloaAd(adType);
+    PreloadAd(adType) {
+      this.PreloadAd(adType);
     }
   };
 }

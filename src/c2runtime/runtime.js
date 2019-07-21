@@ -4,6 +4,7 @@
 assert2(cr, "cr namespace not created");
 assert2(cr.plugins_, "cr.plugins_ not created");
 
+
 /////////////////////////////////////
 // Plugin class
 cr.plugins_.GD_SDK = function(runtime)
@@ -158,7 +159,7 @@ cr.plugins_.GD_SDK = function(runtime)
 		if(!this.sdkReady) return;
 		window['gdsdk']['showBanner']();
 	}
-	
+
 	pluginProto.acts = new Acts();
 
 	//////////////////////////////////////

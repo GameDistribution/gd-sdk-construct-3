@@ -12,8 +12,8 @@
         "highlight": true
       },
       {
-        "id": "ad-viewed",
-        "scriptName": "AdViewed",
+        "id": "preloaded-ad",
+        "scriptName": "PreloadedAd",
         "highlight": false
       }
     ],

@@ -12,7 +12,7 @@
   const PLUGIN_ID = "GD_SDK";
   ////////////////////////////////////////////
 
-  const PLUGIN_VERSION = "1.1.3";
+  const PLUGIN_VERSION = "1.1.0";
   const PLUGIN_CATEGORY = "monetisation";
 
   const PLUGIN_CLASS = (SDK.Plugins.GD_SDK = class MyCustomPlugin extends SDK.IPluginBase {

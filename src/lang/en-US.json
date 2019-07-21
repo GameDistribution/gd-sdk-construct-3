@@ -5,7 +5,7 @@
     "plugins": {
       "gd_sdk": {
         "name": "GameDistribution SDK",
-        "description": "Construct 2 & 3 plugin for the GameDistribution SDK",
+        "description": "Construct 3 plugin for the GameDistribution SDK",
         "help-url": "https://www.gamedistribution.com/sdk",
         "properties": {
           "game-id": {
@@ -18,25 +18,25 @@
         },
         "conditions": {
           "pause-game": {
-            "list-name": "Playing an ad - pause the game",
-            "display-text": "Ad playing",
-            "description": "An ad has started playing - pause the game"
+            "list-name": "Pause game during advertisement",
+            "display-text": "Advertisement is active.",
+            "description": "Pause game during advertisement"
           },
           "resume-game": {
-            "list-name": "Ad has finished playing - resume the game",
-            "display-text": "Ad finished",
-            "description": "An ad has finished playing, you can now resume the game"
+            "list-name": "Resume game after advertisement",
+            "display-text": "Advertisement is not active.",
+            "description": "Resume game after advertisement"
           },
-          "ad-viewed": {
-            "list-name": "The player has viewed an ad",
-            "display-text": "Ad viewed",
-            "description": "The player has watched an entire ad. You can use this to reward them with in-game items, for example."
-          }
+          "preloaded-ad": {
+            "list-name": "Is rewarded advertisement available.",
+            "display-text": "Preloaded advertisement",
+            "description": "Enable/Show rewarded button if available."
+          }          
         },
         "actions": {
           "show-ad": {
             "list-name": "Show an advertisement.",
-            "display-text": "Show an {0} advertisement",
+            "display-text": "Show {0} advertisement",
             "description": "Tries to display an advertisement. Make sure to also handle the appropriate conditions.",
             "params": {
               "adType": {
@@ -51,7 +51,7 @@
           },
           "preload-ad": {
             "list-name": "Preload an advertisement",
-            "display-text": "Preload an {0} advertisement",
+            "display-text": "Preload {0} advertisement",
             "description": "Tries to preload an advertisement. Make sure to also handle the appropriate conditions.",
             "params": {
               "adType": {
