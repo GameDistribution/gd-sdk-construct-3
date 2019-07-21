@@ -1,29 +1,50 @@
 ﻿{
-	"custom": {
-		"conditions": [
-			{
-				"id": "pause-game",
-				"scriptName": "PauseGame",
-				"highlight": true
-			},
-			{
-				"id": "resume-game",
-				"scriptName": "ResumeGame",
-				"highlight": true
-			},{
-				"id": "ad-viewed",
-				"scriptName": "AdViewed",
-				"highlight": false
-			}
-		],
-		"actions": [
-			{
-				"id": "show-ad",
-				"scriptName": "ShowAd",
-				"highlight": true
-			}
-		],
-		"expressions": [
-		]
-	}
+  "custom": {
+    "conditions": [
+      {
+        "id": "pause-game",
+        "scriptName": "PauseGame",
+        "highlight": true
+      },
+      {
+        "id": "resume-game",
+        "scriptName": "ResumeGame",
+        "highlight": true
+      },
+      {
+        "id": "ad-viewed",
+        "scriptName": "AdViewed",
+        "highlight": false
+      }
+    ],
+    "actions": [
+      {
+        "id": "show-ad",
+        "scriptName": "ShowAd",
+        "highlight": true,
+        "params": [
+          {
+            "id": "adType",
+            "type": "combo",
+            "initialValue": "interstitial",
+            "items": ["interstitial", "rewarded"]
+          }
+        ]
+      },
+      {
+        "id": "preload-ad",
+        "scriptName": "PreloadAd",
+        "highlight": true,
+        "params": [
+          {
+            "id": "adType",
+            "type": "combo",
+            "initialValue": "rewarded",
+            "items": ["interstitial", "rewarded"]
+          }
+        ]
+      }
+    ],
+    "expressions": []
+  }
 }
