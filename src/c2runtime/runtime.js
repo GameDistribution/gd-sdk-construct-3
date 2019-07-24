@@ -4,168 +4,184 @@
 assert2(cr, "cr namespace not created");
 assert2(cr.plugins_, "cr.plugins_ not created");
 
-
 /////////////////////////////////////
 // Plugin class
-cr.plugins_.GD_SDK = function(runtime)
-{
-	this.runtime = runtime;
+cr.plugins_.GD_SDK = function(runtime) {
+  this.runtime = runtime;
 };
 
-(function ()
-{
-	var pluginProto = cr.plugins_.GD_SDK.prototype;
-		
-	/////////////////////////////////////
-	// Object type class
-	pluginProto.Type = function(plugin)
-	{
-		this.plugin = plugin;
-		this.runtime = plugin.runtime;
-	};
+(function() {
+  var pluginProto = cr.plugins_.GD_SDK.prototype;
 
-	var typeProto = pluginProto.Type.prototype;
+  /////////////////////////////////////
+  // Object type class
+  pluginProto.Type = function(plugin) {
+    this.plugin = plugin;
+    this.runtime = plugin.runtime;
+  };
 
-	typeProto.onCreate = function()
-	{
-	};
+  var typeProto = pluginProto.Type.prototype;
 
-	/////////////////////////////////////
-	// Instance class
-	pluginProto.Instance = function(type)
-	{
-		this.type = type;
-		this.runtime = type.runtime;
-		
-		// Initialise object properties
-		this.gameID = 0;
-		this.adPlaying = false;
-		this.adViewed = false;
+  typeProto.onCreate = function() {};
 
-	};
-	
-	var instanceProto = pluginProto.Instance.prototype;
-	
-	instanceProto.onCreate = function()
-	{
-		// Read properties set in C3
-		this.gameID = this.properties[0];
+  /////////////////////////////////////
+  // Instance class
+  pluginProto.Instance = function(type) {
+    this.type = type;
+    this.runtime = type.runtime;
+    this.available_adtypes = ["interstitial", "rewarded"];
 
-		try {
-			try {
-				if(this._runtime.IsPreview()) {
-					localStorage.setItem("gd_debug", true);
-					localStorage.setItem("gd_tag", "https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/124319096/external/single_ad_samples&ciu_szs=300x250&impl=s&gdfp_req=1&env=vp&output=vast&unviewed_position_start=1&cust_params=deployment%3Ddevsite%26sample_ct%3Dlinear&correlator=")					
-				}else{
-					localStorage.removeItem("gd_debug");
-					localStorage.removeItem("gd_tag");
-				}
-			} catch (e) {
-			}
-		} catch (e) {
-		}
+    // Initialise object properties
+    this._gameID = 0;
+    this._adPlaying = false;
+    this._adViewed = false;
+    this._adPreloaded = false;
+  };
 
-		window["GD_OPTIONS"] = {
-			"gameId": this.gameID,
-			// "prefix": "gd_", // Set your own prefix in case you get id conflicts.
-			"advertisementSettings": {
-				// "debug": true, // Enable IMA SDK debugging.
-				// "autoplay": false, // Don't use this because of browser video autoplay restrictions.
-				// "locale": "en", // Locale used in IMA SDK, this will localise the "Skip ad after x seconds" phrases.
-			},
-			"onEvent": event => {
-				//https://github.com/GameDistribution/GD-HTML5
-				switch (event.name) {
-					case "SDK_GAME_START":
-						// advertisement done, resume game logic and unmute audio
-						this.adPlaying = false;
-						break;
-					case "SDK_GAME_PAUSE":
-						// pause game logic / mute audio
-						this.adPlaying = true;
-						break;
-					case "SDK_GDPR_TRACKING":
-						// this event is triggered when your user doesn't want to be tracked
-						break;
-					case "SDK_GDPR_TARGETING":
-						// this event is triggered when your user doesn't want personalised targeting of ads and such
-						break;
-					case "COMPLETE":
-						// this event is triggered when the user watched an entire ad
-						this.adViewed = true;
-						setTimeout(()=>{
-							this.adViewed = false;
-						}, 5000);
-						break;
-					case "SDK_READY":
-						let debugBar = document.querySelector("#gdsdk__implementation");
-						if(debugBar) debugBar.remove();
-						this.sdkReady = true;
-						break;
-				}
-			},
-		};
+  var instanceProto = pluginProto.Instance.prototype;
 
-		//Load the SDK from the CDN
-		(function(d, s, id) {
-			var js, fjs = d.getElementsByTagName(s)[0];
-			if (d.getElementById(id)) return;
-			js = d.createElement(s);
-			js.id = id;
-			js.src = '//html5.api.gamedistribution.com/main.min.js';
-			fjs.parentNode.insertBefore(js, fjs);
-		}(document, 'script', 'gamedistribution-jssdk'));
-	};
-	
-	instanceProto.saveToJSON = function ()
-	{
-		return {};
-	};
-	
-	instanceProto.loadFromJSON = function (o)
-	{
-	};
-	
-	/**BEGIN-PREVIEWONLY**/
-	instanceProto.getDebuggerValues = function (propsections)
-	{
-	};
-	/**END-PREVIEWONLY**/
+  instanceProto.onCreate = function() {
+    // Read properties set in C3
+    this._gameID = this.properties[0];
 
-	//////////////////////////////////////
-	// Conditions
-	function Cnds() {};
+    try {
+      try {
+        if (this._runtime.IsPreview()) {
+          localStorage.setItem("gd_debug", true);
+          localStorage.setItem(
+            "gd_tag",
+            "https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/124319096/external/single_ad_samples&ciu_szs=300x250&impl=s&gdfp_req=1&env=vp&output=vast&unviewed_position_start=1&cust_params=deployment%3Ddevsite%26sample_ct%3Dlinear&correlator="
+          );
+        } else {
+          localStorage.removeItem("gd_debug");
+          localStorage.removeItem("gd_tag");
+        }
+      } catch (e) {}
+    } catch (e) {}
 
-	Cnds.prototype.ResumeGame = function() {
-		return !this.adPlaying;
-	},
+    window["GD_OPTIONS"] = {
+      gameId: this.gameID,
+      // "prefix": "gd_", // Set your own prefix in case you get id conflicts.
+      advertisementSettings: {
+        // "debug": true, // Enable IMA SDK debugging.
+        // "autoplay": false, // Don't use this because of browser video autoplay restrictions.
+        // "locale": "en", // Locale used in IMA SDK, this will localise the "Skip ad after x seconds" phrases.
+      },
+      onEvent: event => {
+        //https://github.com/GameDistribution/GD-HTML5
+        switch (event.name) {
+          case "SDK_GAME_START":
+            // advertisement done, resume game logic and unmute audio
+            this._adPlaying = false;
+            break;
+          case "SDK_GAME_PAUSE":
+            // pause game logic / mute audio
+            this._adPlaying = true;
+            break;
+          case "SDK_GDPR_TRACKING":
+            // this event is triggered when your user doesn't want to be tracked
+            break;
+          case "SDK_GDPR_TARGETING":
+            // this event is triggered when your user doesn't want personalised targeting of ads and such
+            break;
+          case "COMPLETE":
+            // this event is triggered when the user watched an entire ad
+            this.adViewed = true;
+            setTimeout(() => {
+              this._adViewed = false;
+            }, 5000);
+            break;
+          case "SDK_READY":
+            let debugBar = document.querySelector("#gdsdk__implementation");
+            if (debugBar) debugBar.remove();
+            this._sdkReady = true;
+            break;
+        }
+      }
+    };
 
-	Cnds.prototype.PauseGame = function() {
-		return this.adPlaying;
-	},
+    //Load the SDK from the CDN
+    (function(d, s, id) {
+      var js,
+        fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s);
+      js.id = id;
+      js.src = "//html5.api.gamedistribution.com/main.min.js";
+      fjs.parentNode.insertBefore(js, fjs);
+    })(document, "script", "gamedistribution-jssdk");
+  };
 
-	Cnds.prototype.AdViewed = function() {
-		return this.adViewed;
-	}
-	
-	pluginProto.cnds = new Cnds();
+  instanceProto.saveToJSON = function() {
+    return {};
+  };
 
-	//////////////////////////////////////
-	// Actions
-	function Acts() {};
+  instanceProto.loadFromJSON = function(o) {};
 
-	Acts.prototype.ShowAd = function()
-	{
-		if(!this.sdkReady) return;
-		window['gdsdk']['showBanner']();
-	}
+  /**BEGIN-PREVIEWONLY**/
+  instanceProto.getDebuggerValues = function(propsections) {};
+  /**END-PREVIEWONLY**/
 
-	pluginProto.acts = new Acts();
+  //////////////////////////////////////
+  // Conditions
+  function Cnds() {}
 
-	//////////////////////////////////////
-	// Expressions
-	function Exps() {};
-	
-	pluginProto.exps = new Exps();
+  (Cnds.prototype.ResumeGame = function() {
+    return !this._adPlaying;
+  }),
+    (Cnds.prototype.PauseGame = function() {
+      return this._adPlaying;
+    }),
+    (Cnds.prototype.AdViewed = function() {
+      return this._adViewed;
+    }),
+    (Cnds.prototype.PreloadedAd = function() {
+      return this._preloadedAd;
+    });
 
-}());
+  pluginProto.cnds = new Cnds();
+
+  //////////////////////////////////////
+  // Actions
+  function Acts() {}
+
+  Acts.prototype.ShowAd = function(adType) {
+    if (!this._sdkReady) return;
+
+    adType = this._available_adtypes[adType] || adType;
+
+    if (!this._sdkReady) return;
+    var gdsdk = window["gdsdk"];
+    if (gdsdk !== "undefined" && gdsdk.showAd !== "undefined") {
+      gdsdk.showAd(adType);
+    }
+  };
+
+  Acts.prototype.PreloadAd = function(adType) {
+    if (!this._sdkReady) return;
+
+    adType = this._available_adtypes[adType] || adType;
+
+    this._preloadedAd = false;
+
+    var gdsdk = window["gdsdk"];
+    if (gdsdk !== "undefined" && gdsdk.preloadAd !== "undefined") {
+      gdsdk
+        .preloadAd(adType)
+        .then(() => {
+          this._preloadedAd = true;
+        })
+        .catch(error => {
+          this._preloadedAd = false;
+        });
+    }
+  };
+
+  pluginProto.acts = new Acts();
+
+  //////////////////////////////////////
+  // Expressions
+  function Exps() {}
+
+  pluginProto.exps = new Exps();
+})();
