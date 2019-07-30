@@ -86,7 +86,7 @@ cr.plugins_.GD_SDK = function(runtime) {
             break;
           case "COMPLETE":
             // this event is triggered when the user watched an entire ad
-            this.adViewed = true;
+            this._adViewed = true;
             setTimeout(() => {
               this._adViewed = false;
             }, 5000);
