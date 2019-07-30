@@ -117,18 +117,10 @@
       }
     }
 
-    ShowAd() {
+    ShowAd(adType) {
       var gdsdk = window["gdsdk"];
       if (gdsdk !== "undefined" && gdsdk.showAd !== "undefined") {
-        gdsdk.showAd();
-      }
-    }
-
-    ShowRewardedAd() {
-      var gdsdk = window["gdsdk"];
-      if (gdsdk !== "undefined" && gdsdk.showAd !== "undefined") {
-        this._preloadedAd = false;
-        gdsdk.showAd("rewarded");
+        gdsdk.showAd(adType);
       }
     }
   };
