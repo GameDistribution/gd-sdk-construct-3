@@ -121,6 +121,10 @@
       var gdsdk = window["gdsdk"];
       if (gdsdk !== "undefined" && gdsdk.showAd !== "undefined") {
         gdsdk.showAd(adType);
+
+        if (adType === "rewarded") {
+          this._preloadedAd = false;
+        }
       }
     }
   };
