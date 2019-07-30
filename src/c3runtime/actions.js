@@ -6,7 +6,7 @@
       this.ShowAd();
     },
     PreloadRewardedAd() {
-      this.PreloadAd();
+      this.PreloadRewardedAd();
     },
     ShowRewardedAd() {
       this.ShowAd("rewarded");
