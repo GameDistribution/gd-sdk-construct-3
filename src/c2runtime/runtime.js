@@ -157,6 +157,19 @@ cr.plugins_.GD_SDK = function(runtime) {
     }
   };
 
+  Acts.prototype.ShowRewardedAd = function() {
+    if (!this._sdkReady) return;
+
+    // adType = this._available_adtypes[adType] || adType;
+
+    if (!this._sdkReady) return;
+    var gdsdk = window["gdsdk"];
+    if (gdsdk !== "undefined" && gdsdk.showAd !== "undefined") {
+      this._preloadedAd = false;
+      gdsdk.showAd("rewarded");
+    }
+  };
+
   Acts.prototype.PreloadRewardedAd = function() {
     if (!this._sdkReady) return;
 
