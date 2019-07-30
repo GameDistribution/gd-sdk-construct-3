@@ -21,28 +21,17 @@
       {
         "id": "show-ad",
         "scriptName": "ShowAd",
-        "highlight": true,
-        "params": [
-          {
-            "id": "adType",
-            "type": "combo",
-            "initialValue": "interstitial",
-            "items": ["interstitial", "rewarded"]
-          }
-        ]
+        "highlight": true
       },
       {
-        "id": "preload-ad",
-        "scriptName": "PreloadAd",
-        "highlight": true,
-        "params": [
-          {
-            "id": "adType",
-            "type": "combo",
-            "initialValue": "rewarded",
-            "items": ["interstitial", "rewarded"]
-          }
-        ]
+        "id": "show-rewarded-ad",
+        "scriptName": "ShowRewardedAd",
+        "highlight": true
+      },
+      {
+        "id": "preload-rewarded-ad",
+        "scriptName": "PreloadRewardedAd",
+        "highlight": true
       }
     ],
     "expressions": []
