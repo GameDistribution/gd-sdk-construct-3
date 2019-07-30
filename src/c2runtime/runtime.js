@@ -145,29 +145,42 @@ cr.plugins_.GD_SDK = function(runtime) {
   // Actions
   function Acts() {}
 
-  Acts.prototype.ShowAd = function(adType) {
+  Acts.prototype.ShowAd = function() {
     if (!this._sdkReady) return;
 
-    adType = this._available_adtypes[adType] || adType;
+    // adType = this._available_adtypes[adType] || adType;
 
     if (!this._sdkReady) return;
     var gdsdk = window["gdsdk"];
     if (gdsdk !== "undefined" && gdsdk.showAd !== "undefined") {
-      gdsdk.showAd(adType);
+      gdsdk.showAd();
     }
   };
 
-  Acts.prototype.PreloadAd = function(adType) {
+  Acts.prototype.ShowRewardedAd = function() {
     if (!this._sdkReady) return;
 
-    adType = this._available_adtypes[adType] || adType;
+    // adType = this._available_adtypes[adType] || adType;
+
+    if (!this._sdkReady) return;
+    var gdsdk = window["gdsdk"];
+    if (gdsdk !== "undefined" && gdsdk.showAd !== "undefined") {
+      this._preloadedAd = false;
+      gdsdk.showAd("rewarded");
+    }
+  };
+
+  Acts.prototype.PreloadRewardedAd = function() {
+    if (!this._sdkReady) return;
+
+    // adType = this._available_adtypes[adType] || adType;
 
     this._preloadedAd = false;
 
     var gdsdk = window["gdsdk"];
     if (gdsdk !== "undefined" && gdsdk.preloadAd !== "undefined") {
       gdsdk
-        .preloadAd(adType)
+        .preloadAd("rewarded")
         .then(() => {
           this._preloadedAd = true;
         })

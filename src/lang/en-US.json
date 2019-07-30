@@ -31,38 +31,23 @@
             "list-name": "Is rewarded advertisement available.",
             "display-text": "Preloaded advertisement",
             "description": "Enable/Show rewarded button if available."
-          }          
+          }
         },
         "actions": {
           "show-ad": {
             "list-name": "Show an advertisement.",
-            "display-text": "Show {0} advertisement",
-            "description": "Tries to display an advertisement. Make sure to also handle the appropriate conditions.",
-            "params": {
-              "adType": {
-                "name": "Ad Type",
-                "desc": "Ad type",
-                "items": {
-                  "interstitial": "Interstitial",
-                  "rewarded": "Rewarded"
-                }
-              }
-            }
+            "display-text": "Show an advertisement",
+            "description": "Tries to display an advertisement. Make sure to also handle the appropriate conditions."
           },
-          "preload-ad": {
-            "list-name": "Preload an advertisement",
-            "display-text": "Preload {0} advertisement",
-            "description": "Tries to preload an advertisement. Make sure to also handle the appropriate conditions.",
-            "params": {
-              "adType": {
-                "name": "Ad Type",
-                "desc": "Ad type",
-                "items": {
-                  "interstitial": "Interstitial",
-                  "rewarded": "Rewarded"
-                }
-              }
-            }
+          "show-rewarded-ad": {
+            "list-name": "Show a rewarded advertisement.",
+            "display-text": "Show a rewarded advertisement",
+            "description": "Tries to display a rewarded advertisement. Make sure to also handle the appropriate conditions."
+          },
+          "preload-rewarded-ad": {
+            "list-name": "Preload a rewarded advertisement",
+            "display-text": "Preload a rewarded advertisement",
+            "description": "Tries to preload a rewarded advertisement. Make sure to also handle the appropriate conditions."
           }
         }
       }
