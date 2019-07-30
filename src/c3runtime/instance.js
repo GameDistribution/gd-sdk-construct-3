@@ -101,15 +101,13 @@
       // load state for savegames
     }
 
-    PreloadAd(adType) {
-      adType = this._available_adtypes[adType] || adType;
-
+    PreloadRewardedAd() {
       this._preloadedAd = false;
 
       var gdsdk = window["gdsdk"];
       if (gdsdk !== "undefined" && gdsdk.preloadAd !== "undefined") {
         gdsdk
-          .preloadAd(adType)
+          .preloadAd("rewarded")
           .then(() => {
             this._preloadedAd = true;
           })
@@ -118,13 +116,18 @@
           });
       }
     }
-    
-    ShowAd(adType) {
-      adType = this._available_adtypes[adType] || adType;
 
+    ShowAd() {
       var gdsdk = window["gdsdk"];
       if (gdsdk !== "undefined" && gdsdk.showAd !== "undefined") {
-        gdsdk.showAd(adType);
+        gdsdk.showAd();
+      }
+    }
+
+    ShowRewardedAd() {
+      var gdsdk = window["gdsdk"];
+      if (gdsdk !== "undefined" && gdsdk.showAd !== "undefined") {
+        gdsdk.showAd("rewarded");
       }
     }
   };

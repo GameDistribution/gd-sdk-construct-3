@@ -2,11 +2,14 @@
 
 {
   C3.Plugins.GD_SDK.Acts = {
-    ShowAd(adType) {
-      this.ShowAd(adType);
+    ShowAd() {
+      this.ShowAd();
     },
-    PreloadAd(adType) {
-      this.PreloadAd(adType);
+    PreloadRewardedAd() {
+      this.PreloadAd();
+    },
+    ShowRewardedAd() {
+      this.ShowAd("rewarded");
     }
   };
 }

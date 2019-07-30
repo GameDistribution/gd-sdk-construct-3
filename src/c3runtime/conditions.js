@@ -10,6 +10,9 @@
     },
     PreloadedAd() {
       return this._preloadedAd;
+    },
+    AdViewed() {
+      return this._adViewed;
     }
   };
 }
