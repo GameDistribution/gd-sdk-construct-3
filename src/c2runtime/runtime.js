@@ -60,7 +60,7 @@ cr.plugins_.GD_SDK = function(runtime) {
     } catch (e) {}
 
     window["GD_OPTIONS"] = {
-      gameId: this.gameID,
+      gameId: this._gameID,
       // "prefix": "gd_", // Set your own prefix in case you get id conflicts.
       advertisementSettings: {
         // "debug": true, // Enable IMA SDK debugging.
