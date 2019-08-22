@@ -1,5 +1,5 @@
 {
-
+  "version": "1.1.2",
   "scripts": {
     "dev": "./node_modules/http-server/bin/http-server ./src -p8080 --cors -c-1",
     "compile": "cd src && zip -r ../dist/gamedistribution-sdk.c3addon ./*"
