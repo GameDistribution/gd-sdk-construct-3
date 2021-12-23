@@ -12,6 +12,11 @@
         "highlight": true
       },
       {
+        "id": "reward-player",
+        "scriptName": "RewardPlayer",
+        "highlight": true
+      },
+      {
         "id": "preloaded-ad",
         "scriptName": "PreloadedAd",
         "highlight": false

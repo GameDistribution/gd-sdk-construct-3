@@ -13,6 +13,9 @@
     },
     AdViewed() {
       return this._adViewed;
+    },
+    RewardPlayer() {
+      return this._giveReward;
     }
   };
 }

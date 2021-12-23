@@ -27,6 +27,11 @@
             "display-text": "Advertisement is not active.",
             "description": "Resume game after advertisement"
           },
+          "reward-player": {
+            "list-name": "Give reward here",
+            "display-text": "Rewarded Ad succeed.",
+            "description": "Rewarded Ad watched completely."
+          },
           "preloaded-ad": {
             "list-name": "Is rewarded advertisement available.",
             "display-text": "Preloaded advertisement",
