@@ -35,6 +35,7 @@ cr.plugins_.GD_SDK = function(runtime) {
     this._gameID = 0;
     this._adPlaying = false;
     this._adViewed = false;
+    this._giveReward = false;
     this._adPreloaded = false;
   };
 
@@ -83,6 +84,13 @@ cr.plugins_.GD_SDK = function(runtime) {
             break;
           case "SDK_GDPR_TARGETING":
             // this event is triggered when your user doesn't want personalised targeting of ads and such
+            break;
+          case "SDK_REWARDED_WATCH_COMPLETE":
+            // this event is triggered when your user doesn't want personalised targeting of ads and such
+            this._giveReward = true;
+            setTimeout(() => {
+              this._giveReward = false;
+            }, 5000);
             break;
           case "COMPLETE":
             // this event is triggered when the user watched an entire ad
@@ -134,6 +142,9 @@ cr.plugins_.GD_SDK = function(runtime) {
     }),
     (Cnds.prototype.AdViewed = function() {
       return this._adViewed;
+    }),
+    (Cnds.prototype.RewardPlayer = function() {
+      return this._giveReward;
     }),
     (Cnds.prototype.PreloadedAd = function() {
       return this._preloadedAd;

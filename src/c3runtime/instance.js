@@ -10,6 +10,7 @@
       this._sdkReady = false;
       this._adPlaying = false;
       this._adViewed = false;
+      this._giveReward = false;
       this._preloadedAd = false;
       this._available_adtypes = ["interstitial", "rewarded"];
 
@@ -58,6 +59,13 @@
               break;
             case "SDK_GDPR_TARGETING":
               // this event is triggered when your user doesn't want personalised targeting of ads and such
+              break;
+            case "SDK_REWARDED_WATCH_COMPLETE":
+              // this event is triggered when your user doesn't want personalised targeting of ads and such
+              this._giveReward = true;
+              setTimeout(() => {
+                this._giveReward = false;
+              }, 5000);
               break;
             case "COMPLETE":
               // this event is triggered when the user watched an entire ad
