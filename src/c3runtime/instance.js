@@ -1,5 +1,4 @@
 "use strict";
-
 {
   C3.Plugins.GD_SDK.Instance = class SingleGlobalInstance extends C3.SDKInstanceBase {
     constructor(inst, properties) {
@@ -13,10 +12,14 @@
       this._giveReward = false;
       this._preloadedAd = false;
       this._available_adtypes = ["interstitial", "rewarded"];
+      this._levelSID = null;
+      this._scoreSID = null;
 
       // note properties may be null in some cases
       if (properties) {
         this._gameID = properties[0];
+        this._levelSID = properties[1];
+        this._scoreSID = properties[2];
       }
 
       //   try {
@@ -133,6 +136,23 @@
         if (adType === "rewarded") {
           this._preloadedAd = false;
         }
+      }
+    }
+
+    SendGameEvent() {
+      var scoreText = this._runtime.GetObjectClassBySID(this._scoreSID)._iObjectClass.getFirstInstance().text;
+      var levelText = this._runtime.GetObjectClassBySID(this._levelSID)._iObjectClass.getFirstInstance().text;
+      var score = parseInt(scoreText.trim().replace(/[^\d]/g,''));
+      var level = parseInt(levelText.trim().replace(/[^\d]/g,''));
+      if (gdsdk !== "undefined" && gdsdk.sendEvent !== "undefined" && level !== "undefined" && score !== "undefined") {
+        var obj = {
+          "eventName" : "game-event",
+          "data" : {
+            "level" : level,
+            "score" : score
+          }
+        };
+        gdsdk.sendEvent(obj);
       }
     }
   };
