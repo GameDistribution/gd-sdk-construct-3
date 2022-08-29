@@ -12,11 +12,11 @@
             "name": "Game ID",
             "desc": "Enter your Game ID (required)"
           },
-          "level-text": {
+          "level": {
             "name": "Level",
             "desc": "Enter level object"
           },
-          "score-text": {
+          "score": {
             "name": "Score",
             "desc": "Enter score object"
           }
