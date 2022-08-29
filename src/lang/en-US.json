@@ -11,6 +11,14 @@
           "game-id": {
             "name": "Game ID",
             "desc": "Enter your Game ID (required)"
+          },
+          "level-text": {
+            "name": "Level",
+            "desc": "Enter level object"
+          },
+          "score-text": {
+            "name": "Score",
+            "desc": "Enter score object"
           }
         },
         "aceCategories": {
@@ -53,6 +61,11 @@
             "list-name": "Preload a rewarded advertisement",
             "display-text": "Preload a rewarded advertisement",
             "description": "Tries to preload a rewarded advertisement. Make sure to also handle the appropriate conditions."
+          },
+          "send-game-event": {
+            "list-name": "Send game event",
+            "display-text": "Send game event",
+            "description": "Tries to send score and level information to top frame."
           }
         }
       }
