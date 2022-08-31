@@ -37,7 +37,12 @@
         "id": "preload-rewarded-ad",
         "scriptName": "PreloadRewardedAd",
         "highlight": true
-      }
+      },
+      {
+        "id": "send-game-event",
+        "scriptName": "SendGameEvent",
+        "highlight": true
+      }   
     ],
     "expressions": []
   }

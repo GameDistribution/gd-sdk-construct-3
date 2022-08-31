@@ -12,7 +12,7 @@
   const PLUGIN_ID = "GD_SDK";
   ////////////////////////////////////////////
 
-  const PLUGIN_VERSION = "1.1.3";
+  const PLUGIN_VERSION = "1.1.4";
   const PLUGIN_CATEGORY = "monetisation";
 
   const PLUGIN_CLASS = (SDK.Plugins.GD_SDK = class MyCustomPlugin extends SDK.IPluginBase {
@@ -34,7 +34,11 @@
 
       SDK.Lang.PushContext(".properties");
 
-      this._info.SetProperties([new SDK.PluginProperty("text", "game-id", "")]);
+      this._info.SetProperties([
+        new SDK.PluginProperty("text", "game-id", ""),
+        new SDK.PluginProperty("object","level"),
+        new SDK.PluginProperty("object","score"),
+      ]);
 
       SDK.Lang.PopContext(); // .properties
 

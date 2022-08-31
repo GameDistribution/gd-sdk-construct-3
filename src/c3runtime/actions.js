@@ -10,6 +10,9 @@
     },
     ShowRewardedAd() {
       this.ShowAd("rewarded");
+    },
+    SendGameEvent() {
+      this.SendGameEvent();
     }
   };
 }
