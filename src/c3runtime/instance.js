@@ -146,7 +146,7 @@
       var level = parseInt(levelText.trim().replace(/[^\d]/g,''));
       if (gdsdk !== "undefined" && gdsdk.sendEvent !== "undefined" && level !== "undefined" && score !== "undefined") {
         var obj = {
-          "eventName" : "game-event",
+          "eventName" : "game_event",
           "data" : {
             "level" : level,
             "score" : score
