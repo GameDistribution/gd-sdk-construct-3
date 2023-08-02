@@ -140,20 +140,25 @@
     }
 
     SendGameEvent() {
-      var scoreText = this._runtime.GetObjectClassBySID(this._scoreSID)._iObjectClass.getFirstInstance().text;
-      var levelText = this._runtime.GetObjectClassBySID(this._levelSID)._iObjectClass.getFirstInstance().text;
-      var score = parseInt(scoreText.trim().replace(/[^\d]/g,''));
-      var level = parseInt(levelText.trim().replace(/[^\d]/g,''));
-      if (gdsdk !== "undefined" && gdsdk.sendEvent !== "undefined" && level !== "undefined" && score !== "undefined") {
-        var obj = {
-          "eventName" : "game_event",
-          "data" : {
-            "level" : level,
-            "score" : score
-          }
-        };
-        gdsdk.sendEvent(obj);
+      try {
+        var scoreText = this._runtime.GetObjectClassBySID(this._scoreSID)?._iObjectClass.getFirstInstance()?.text;
+        var levelText = this._runtime.GetObjectClassBySID(this._levelSID)?._iObjectClass.getFirstInstance()?.text;
+        if (gdsdk !== "undefined" && gdsdk.sendEvent !== "undefined" && levelText !== "undefined" && scoreText !== "undefined") {
+          var score = parseInt(scoreText.trim().replace(/[^\d]/g,''));
+          var level = parseInt(levelText.trim().replace(/[^\d]/g,''));
+          var obj = {
+            "eventName" : "game_event",
+            "data" : {
+              "level" : level,
+              "score" : score
+            }
+          };
+          gdsdk.sendEvent(obj);
       }
+      } catch (error) {
+        console.log(error.message);
+      }
+      
     }
   };
 }
